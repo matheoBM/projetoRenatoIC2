@@ -14,10 +14,11 @@ void main()
     int posicao;
     int tamanho;
 
+    string chave;
     FILE* arq;
     char busca[11];
     printf("Insira o codigo a ser buscado: ");
-    scanf("%s%*c", busca);
+    scanf("%s%*c", chave.codigo);
 
     for (int i = 1; i <= 5; i++)
     {
@@ -25,21 +26,19 @@ void main()
         sprintf(nomeArq, "Ordenado_%d.txt", i);
 
         tamanho = contador(nomeArq);
-        string codigos[tamanho + 1];
+        string codigos[tamanho+1];
 
         arq = fopen(nomeArq, "r");
 
-        for (int j = 0; j < tamanho; j++)
+        for (int j = 1; j <= tamanho; j++)
         {
             fscanf(arq, "%s%*c", codigos[j].codigo);
         }
 
-
-        posicao = busca_bin(codigos, tamanho, busca);
-        printf("%i\n", posicao);
+        posicao = busca_bin(codigos, tamanho, chave.codigo);
         if (posicao > 0)
         {
-            printf("O código foi encontrado no mes %i, na posicao %d.\n", i, posicao);
+            printf("O codigo foi encontrado no mes %i, na posicao %d.\n", i, posicao);
         } else {
             printf("O codigo nao foi encontrado no mes %i.\n", i);
         }
@@ -73,7 +72,7 @@ int contador(char nome[])
 int busca_bin(string lista[], int nro, char busca[])
 {
     int L = 0;
-    int R = nro;
+    int R = nro - 1;
     int m;
 
     while (L < R)
